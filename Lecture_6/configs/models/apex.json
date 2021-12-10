@@ -1,0 +1,44 @@
+{
+  "trainer": {
+    "name": "Apex",
+    "model": {
+      "in_channels": 3,
+      "num_actions": 4,
+      "num_downsamplings": 4,
+      "hidden_channels": 4,
+      "hidden_features": 256
+    },
+    "exploration_config": {
+      "max_random_action_probability": 0.2,
+      "min_random_action_probability": 0.1,
+      "decay_steps": 250000,
+      "action_size": 4
+    },
+    "buffer_config": {
+      "name": "prioritized_replay",
+      "size": 250000,
+      "beta_start": 0.5,
+      "beta_end": 1.0,
+      "alpha": 0.6,
+      "augmentation": {
+        "flip": true,
+        "rotate": true,
+        "discrete_actions": true
+      }
+    },
+    "discount_factor": 0.99,
+    "batch_size": 32,
+    "updates_per_consumption": 1,
+    "soft_update_tau": 0.01
+  },
+  "wrapper_config": {
+    "stack_frames": 3
+  },
+  "n_workers": 2,
+  "target_updates": 250000,
+  "steps_per_update": 4,
+  "update_policy_every": 10,
+  "log_every": 100,
+  "save_every": 1000,
+  "initial_steps": 1024
+}
